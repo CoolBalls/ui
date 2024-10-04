@@ -3,23 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DropBot</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>DropBot AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        nav {
+            width: 100%;
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #fff;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        nav button:hover {
+            color: #1a73e8;
+        }
+
+        header {
+            margin-top: 60px;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin: 0;
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .moving-text {
+            font-size: 2.5em; /* Smaller font size */
+            font-weight: bold;
+            color: #1a73e8;
+            white-space: nowrap;
+            animation: move-text 10s linear infinite;
+            position: absolute;
+            top: 220px; /* Adjust this value for vertical positioning */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes move-text {
+            0% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, -10px); /* Optional slight upward movement */
+            }
+            100% {
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .hero {
+            padding: 60px 20px;
+            margin-top: 20px;
+        }
+
+        .product-description {
+            padding: 40px 20px;
+            margin: 20px 0;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .product-description h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            flex: 1;
+            text-align: left; /* Align title to the left */
+        }
+
+        .product-description p, .product-description ul {
+            font-size: 1.2em;
+            line-height: 1.5;
+            margin: 10px 0;
+            text-align: left;
+            flex: 2;
+        }
+
+        .product-description ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            background-color: #555;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ddd;
+            font-size: 1.5em;
+            margin-left: 20px;
+        }
+
+        .get-started {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin-top: 30px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        .get-started:hover {
+            background-color: #0c5bbf;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        .feature-gap {
+            margin-bottom: 60px; /* Space between features */
+        }
+
+        .blue {
+            color: #1a73e8; /* Blue color for every second word */
+        }
+
+        @media (max-width: 768px) {
+            .product-description {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .image-placeholder {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+
+            .get-started {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>DropBot</h1>
-        <p>Your AI-powered product trend tracker.</p>
-    </header>
-    <main>
-        <section id="trending-products">
-            <h2>Trending Products</h2>
-            <div id="products-list"></div>
-        </section>
-    </main>
+    <nav>
+        <h1>DropBot AI</h1>
+        <div class="nav-links">
+            <button onclick="showSection('explore')">Explore</button>
+            <button onclick="showSection('demo')">Demo Video</button>
+            <button onclick="showSection('solutions')">Solutions</button>
+            <button onclick="showSection('dashboard')">Dashboard</button>
+            <a href="index.php?page=dashboard" class="dashboard-button">Go to Dashboard</a>
+            <button onclick="showSection('login')">Sign In</button>
+            <button onclick="showSection('signup')">Sign Up</button>
+        </div>
+    </nav>
+<header>
+    <h1><span class="blue";>DropBot</span> AI</h1>
+</header>
+    <div class="hero" id="explore" style="padding: 60px 20px; margin-top: 20px;">
+        <h2 style="font-size: 3em; margin-bottom: 20px;">Discover E-Commerce Trends Effortlessly</h2>
+        <p style="font-size: 1.5em; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+            DropBot AI is designed to empower aspiring and established e-commerce entrepreneurs alike. Our platform utilizes advanced artificial intelligence to analyze data from social media and market trends, enabling you to identify the hottest products before they saturate the market. This capability allows you to seize profitable opportunities and stay ahead of the competition.
+        </p>
+        <p style="font-size: 1.5em; line-height: 1.6; max-width: 800px; margin: 20px auto;">
+            With DropBot, launching your online store is simplified. Our user-friendly interface allows you to set up your e-commerce business in just minutes, providing a range of customizable themes and seamless payment gateway integrations. Focus on what you do best—selling—while DropBot manages the technical complexities for you!
+        </p>
+    </div>
+    <h2 style="font-size: 2.5em; margin: 40px 0 20px;">Our Features</h2>
+
+    <div class="product-description feature-gap" id="automated-discovery" style="display: flex; align-items: flex-start; margin-bottom: 60px;">
+        <div style="flex: 1; text-align: left; margin-right: 20px;">
+            <h1>
+                <span class="">Automated</span> 
+                <span class="">Product</span> 
+                <span class="">Discovery.</span>
+            </h1>
+            <p>
+                Harness the power of AI to discover trending products effortlessly. DropBot scans social media platforms and market trends, analyzing millions of data points to provide you with real-time insights on what’s hot. This ensures you never miss a profitable opportunity, allowing you to stay ahead of the competition.
+            </p>
+            <ul>
+                <li>AI-driven insights for real-time product trends based on data from platforms like Instagram, TikTok, and Twitter.</li>
+                <li>Comprehensive data analysis from multiple sources to identify emerging products before they go viral.</li>
+                <li>User-friendly dashboard for easy navigation and visualization of trends, making data accessible even for beginners.</li>
+            </ul>
+        </div>
+        <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeng5ZDNlMnN5c3RobnR3dHg5anhudWloaGdhOWhwYzF6MmF5andzeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OvzIoUYcRyfgnptjNs/giphy.gif" alt="Automated Product Discovery" style="height: 300px; object-fit: cover; border-radius: 10px;">
+    </div>
+    <div class="product-description feature-gap" id="store-setup" style="display: flex; align-items: flex-start; margin-bottom: 60px;">
+        <div class="image-placeholder" style="flex: 0 0 auto; margin-right: 20px;">
+            <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnE3aXpsNGdib3M0a3lrYXQ4d28yaW9ybjlnZ2M3aTB5MTVuanZyMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/otZDqnGqQ5ZP6a0jDK/giphy.gif" alt="Seamless Store Setup" style="height: 250px; width: auto; border-radius: 10px; object-fit: cover;">
+        </div>
+        <div style="flex: 1; text-align: left;">
+            <h1>
+                <span class="">Seamless</span> 
+                <span class="">Store</span> 
+                <span class="">Setup.</span>
+            </h1>
+            <p>
+                Launch your e-commerce store in minutes with our intuitive setup process. Choose from a variety of customizable themes, all designed to convert visitors into customers. Let DropBot handle the technical details, from domain registration to web hosting, allowing you to focus on what matters most: selling your products.
+            </p>
+            <ul>
+                <li>Drag-and-drop website builder makes designing your store effortless, even without coding knowledge.</li>
+                <li>Pre-designed templates for various niches ensure that you can find the perfect look for your brand.</li>
+                <li>Mobile-responsive designs guarantee that your store looks great on any device, enhancing user experience.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="product-description feature-gap" id="inventory-management" style="display: flex; align-items: flex-start; margin-bottom: 60px;">
+        <div style="flex: 1; text-align: left; margin-right: 20px;">
+            <h1><span class="">Automated</span> <span class="">Inventory</span> <span class="">Management.</span></h1>
+            <p>
+                Keep your stock in check with automated inventory management. DropBot tracks your product levels in real-time and alerts you when it’s time to reorder. This proactive approach helps you maintain optimal stock levels, ensuring you never run out of best-sellers and preventing lost sales.
+            </p>
+            <ul>
+                <li>Real-time inventory tracking provides you with insights into your stock levels, helping you make informed decisions.</li>
+                <li>Automatic low-stock notifications alert you when it's time to restock, allowing for seamless inventory management.</li>
+                <li>Easy product restock management helps you maintain optimal inventory levels and avoid missed sales opportunities.</li>
+            </ul>
+        </div>
+        <div class="image-placeholder" style="flex: 0 0 auto; height: 250px; width: auto; margin-left: 20px; overflow: hidden;">
+            <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXdndmQ3Nnh0OTVsZ3k1em5wYmR4cXQzMDI5OXdvc2ZmbndtNDQ1dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xDtSNmEgbbsZV2d2yA/giphy.gif" alt="Inventory Management GIF" style="height: 100%; width: auto; object-fit: cover;">
+        </div>
+    </div>  
+    <div class="product-description feature-gap" id="marketing-insights" style="display: flex; align-items: flex-start; margin-bottom: 60px;">
+        <div class="image-placeholder" style="height: 250px; width: 300px; overflow: hidden; margin-right: 20px;">
+            <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGE0MW9kNDdzc2E3b3RyZmR2MjFpdWN5cW5wdzV2dHlhNmFweGZtdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/heKGKGijkSWsou3DXF/giphy.gif" alt="Marketing Insights GIF" style="height: 100%; width: auto; object-fit: cover;">
+        </div>
+        <div style="flex: 1; text-align: left;">
+            <h1><span class="">Customized</span> <span class="">Marketing</span> <span class="">Insights.</span></h1>
+            <p>
+                Optimize your marketing strategies with tailored insights that align with your target audience. DropBot provides you with actionable data on customer behavior and preferences, enabling you to craft campaigns that convert effectively. This ensures your marketing efforts are not only targeted but also measurable, leading to better ROI.
+            </p>
+            <ul>
+                <li>Detailed customer segmentation allows you to target specific demographics with personalized messages.</li>
+                <li>Performance tracking for marketing campaigns helps you identify what works and what doesn’t, refining your approach.</li>
+                <li>A/B testing capabilities help you continually improve your campaigns by testing different approaches and learning from the results.</li>
+            </ul>
+        </div>
+    </div>  
+    <div class="product-description feature-gap" id="analytics-dashboard" style="display: flex; align-items: flex-start; margin-bottom: 60px;">
+        <div style="flex: 1; text-align: left; margin-right: 20px;">
+            <h1><span class="">User-Friendly</span> <span class="">Analytics</span> <span class="">Dashboard.</span></h1>
+            <p>
+                Gain insights into your business performance with our comprehensive analytics dashboard. Visualize key metrics such as sales, customer engagement, and traffic sources, empowering you to make data-driven decisions that help scale your operations and drive growth. The dashboard is designed to be intuitive, allowing you to interpret complex analytics easily.
+            </p>
+            <ul>
+                <li>Customizable reports and visualizations enable you to focus on the metrics that matter most to you.</li>
+                <li>KPI tracking for sales and customer engagement helps you monitor your business health in real-time.</li>
+                <li>Intuitive interface allows for easy data interpretation, making complex analytics accessible to everyone.</li>
+            </ul>
+        </div>
+        <div class="image-placeholder" style="height: 250px; width: 300px; overflow: hidden; margin-left: 20px;">
+            <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB4ODliOXhydXFzeG43NXV5bjJydG96MDhhNmlzc2Z5MXhkeTFqdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PeT4luYZ852oSO3oyz/giphy.gif" alt="Analytics Dashboard GIF" style="height: 100%; width: auto; object-fit: cover;">
+        </div>
+    </div> 
+    <h2 style="font-size: 2.5em; margin: 40px 0 20px;">How to Use</span> <span class="blue">DropBot</span></h2>
+    
+    <div class="product-description feature-gap" style="display: flex; align-items: flex-start; margin-bottom: 60px;">
+        <div class="image-placeholder" style="height: 250px; width: 300px; overflow: hidden; margin-right: 20px;">
+            <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWdvMjR2dzZ6ZThhY2Z6Z2xxM3ZiazF2d2s2eGxjdjh6dTRzeHBzYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/n4tFMbztyAKijoNN51/giphy.gif" alt="Getting Started GIF" style="width: 100%; height: auto; object-fit: cover;">
+        </div>
+        <div style="flex: 1; text-align: left;">
+            <h1><span class="">Getting</span> <span class="">Started.</span></h1>
+            <p>
+                Using DropBot is simple and straightforward. Follow these steps to start your journey:
+            </p>
+            <ul>
+                <li>Create an account on DropBot AI by filling out the registration form and verifying your email address.</li>
+                <li>Set up your online store by choosing a theme and customizing it to reflect your brand's identity.</li>
+                <li>Utilize the features available to discover market trends, manage your inventory, and optimize your marketing campaigns.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="product-description feature-gap" style="display: flex; align-items: flex-start; margin-bottom: 60px;">
+        <div style="flex: 1; text-align: left; margin-right: 20px;">
+            <h1><span class="">Navigating</span> <span class="">The</span> <span class="">Dashboard.</span></h1>
+            <p>
+                Familiarize yourself with the user-friendly dashboard. Here, you can access all features, view analytics, and make data-driven decisions easily. Explore different sections like product discovery, inventory management, and marketing insights to fully leverage DropBot's capabilities.
+            </p>
+            <h3>Dashboard Features:</h3>
+            <ul>
+                <li><strong>Product Discovery:</strong> Easily browse and search for trending products to add to your store.</li>
+                <li><strong>Inventory Management:</strong> Monitor your stock levels, set low-stock alerts, and manage product listings effortlessly.</li>
+                <li><strong>Marketing Insights:</strong> Access tools to analyze customer behavior and optimize your marketing strategies.</li>
+                <li><strong>Sales Analytics:</strong> Visualize sales trends and customer engagement through intuitive charts and reports.</li>
+                <li><strong>Settings and Configuration:</strong> Customize your store settings, payment methods, and shipping options from one centralized location.</li>
+            </ul>
+        </div>
+        <div class="image-placeholder" style="height: 200px; overflow: hidden;">
+            <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGFhZHR6cnM0a2pvZncwaW16bmV3ZXg3NG91aTV4aGNrMXczZTFlYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eFyyOZWefn4564xo2d/giphy.gif" alt="Navigating Dashboard GIF" style="width: 100%; height: auto; object-fit: cover;">
+        </div>
+    </div>
+    <button class="get-started" onclick="showSection('dashboard')">Get Started</button>
+
     <footer>
-        <p>&copy; 2024 DropBot</p>
+        &copy; 2024 DropBot AI. All rights reserved.
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>
